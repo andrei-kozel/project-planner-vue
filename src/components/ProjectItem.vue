@@ -26,6 +26,7 @@ export default defineComponent({
   data() {
     return {
       showDetails: false,
+      url: "http://localhost:3000/projects/" + this.project.id,
     };
   },
   methods: {
@@ -36,10 +37,25 @@ export default defineComponent({
       console.log("edit");
     },
     deleteProject() {
-      console.log("delete");
+      fetch(this.url, {
+        method: "DELETE",
+      }).then(() => {
+        this.$emit("delete", this.project.id);
+      });
     },
+
     doneProject() {
-      console.log("done");
+      fetch(this.url, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ completed: !this.project.completed }),
+      })
+        .then(() => {
+          this.$emit("done", this.project.id);
+        })
+        .catch((err) => console.log(err));
     },
   },
 });

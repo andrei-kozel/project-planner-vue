@@ -1,6 +1,6 @@
 <template>
-  <div v-for="project in projects" :key="project.id" @add="handleAdd">
-    <ProjectItem :project="project" />
+  <div v-for="project in projects" :key="project.id">
+    <ProjectItem :project="project" @delete="handleDelete" @done="handleDone" />
   </div>
 </template>
 
@@ -38,8 +38,16 @@ export default defineComponent({
       .catch((err) => console.log(err));
   },
   methods: {
-    handleAdd(project: Project) {
-      console.log(project);
+    handleDelete(id: number) {
+      this.projects = this.projects.filter((project) => project.id !== id);
+    },
+    handleDone(id: number) {
+      this.projects = this.projects.map((project) => {
+        if (project.id === id) {
+          project.completed = !project.completed;
+        }
+        return project;
+      });
     },
   },
 });
