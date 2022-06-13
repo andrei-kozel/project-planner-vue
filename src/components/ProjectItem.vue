@@ -34,7 +34,10 @@ export default defineComponent({
       this.showDetails = !this.showDetails;
     },
     editProject() {
-      console.log("edit");
+      this.$router.push({
+        name: "edit",
+        params: { id: this.project.id },
+      });
     },
     deleteProject() {
       fetch(this.url, {

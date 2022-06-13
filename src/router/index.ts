@@ -13,6 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/project/:id",
     name: "edit",
     component: EditProject,
+    props: true,
   },
   {
     path: "/add",
