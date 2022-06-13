@@ -15,7 +15,7 @@
     {
       "title": "Test",
       "details": "Test",
-      "completed": false,
+      "completed": true,
       "id": 3
     }
   ]
